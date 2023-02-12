@@ -86,7 +86,7 @@ const HomePage = () => {
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await axios.post("/materials/delete-material", {
+      await axios.post("/api/v1/materials/delete-material", {
         materialId: record.materialId,
       });
       let tempData = allMaterials;
@@ -110,7 +110,7 @@ const HomePage = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       setLoading(true);
       if (editable) {
-        await axios.post("/materials/edit-material", { ...values });
+        await axios.post("/api/v1/materials/edit-material", { ...values });
         setEditable(values);
         let tempData = allMaterials;
         let modifiedIndex = tempData.findIndex((material) => material.materialId == values.materialId)
@@ -121,7 +121,7 @@ const HomePage = () => {
         setLoading(false)
         message.success("Material Updated Successfully");
       } else {
-        await axios.post("/materials/add-material", {
+        await axios.post("/api/v1/materials/add-material", {
           ...values,
         });
         setAllMaterails([...allMaterials,values]);
